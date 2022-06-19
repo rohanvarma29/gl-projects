@@ -1,0 +1,46 @@
+<!--
+<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Add Books
+</button>&nbsp;&nbsp; -->
+<nav class="navbar navbar-light bg-success">
+    <div class="container-fluid">
+      <h3>Your Completed list Of Books</h3>
+    </div>
+  </nav>
+  
+  
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Image</th>
+        <th scope="col">Book Name</th>
+        <th scope="col">Pages</th>
+        <th scope="col">Author</th>
+        <th scope="col">Country</th>
+        <th scope="col">Language</th>
+        <th scope="col">Year</th>
+      </tr>
+    </thead>
+  
+  
+    <tbody>
+      <ng-container *ngFor="let book of bookData">
+  
+  
+      <tr *ngIf="book.wishlist">
+        <td>{{book.id}}</td>
+        <td><img src='assets/{{book.imageLink}}' alt="Girl in a jacket" width="80" height="100"></td>
+        <td>{{book.title}}</td>
+        <td>{{book.pages}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.country}}</td>
+        <td>{{book.language}}</td>
+        <td>{{book.year}}</td>
+  
+  
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+  

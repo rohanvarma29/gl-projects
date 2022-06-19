@@ -40,7 +40,12 @@ export class ApiService {
     return this.http.get<any>("http://localhost:3000/books").pipe(map((res:any)=>{
       return res;
     }))
-  }
 
+  }
+  completedlistDetails(){
+    return this.http.get<any>("http://localhost:3000/books").pipe(map((res:any)=>{
+      return res;
+    }))
+  }
 
 }

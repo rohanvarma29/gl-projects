@@ -4,12 +4,14 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { BookDashboardComponent } from './book-dashboard/book-dashboard.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { CompletedlistComponent } from './completed-list/completed-list.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'viewlist', pathMatch:'full'},
   {path:'login', component:LoginComponent},
   {path:'signup', component:SignupComponent},
   {path:'wishlist', component:WishlistComponent},
+  {path:'completedlist', component:CompletedlistComponent},
   {path:'viewlist', component:BookDashboardComponent},
   {path:'dashboard', component:BookDashboardComponent}
 ];

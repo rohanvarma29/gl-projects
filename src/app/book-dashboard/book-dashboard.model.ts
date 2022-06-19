@@ -6,4 +6,5 @@ export class BookModel{
   mobile:number=0;
   salary:number=0;
   wishlist : boolean = false;
+  completedlist : boolean = false;
 }

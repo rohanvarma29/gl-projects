@@ -107,4 +107,13 @@ export class BookDashboardComponent implements OnInit {
       this.getBookDetails()
     })
   }
+
+  addtocompletedlist(book:BookModel){
+    book.completedlist = !book.completedlist;
+    this.api.updateBooks(book, book.id).subscribe(res=>{
+      alert("Book Detail Record Updated")
+
+      this.getBookDetails()
+    })
+  }
 }
