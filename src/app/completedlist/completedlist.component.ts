@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../shared/api.service';
-import {BookModel} from './completed-list.model'
+import {BookModel} from './completedlist.model';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-completedlist',
-  templateUrl: './completed-list.component.html',
-  styleUrls: ['./completed-list.component.css']
+  templateUrl: './completedlist.component.html',
+  styleUrls: ['./completedlist.component.css']
 })
-export class CompletedlistComponent implements OnInit {
+export class CompletedListComponent implements OnInit {
   formValue!: FormGroup;
   BookModelObj : BookModel = new BookModel();
   bookData !: any;
@@ -45,7 +47,6 @@ export class CompletedlistComponent implements OnInit {
   getBookDetails(){      // get Api Done
     this.api.getBooks().subscribe(res=>{
       this.bookData = res;
-      
     })
   }
 

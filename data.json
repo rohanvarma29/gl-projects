@@ -10,7 +10,8 @@
       "pages": 209,
       "title": "Things Fall Apart",
       "year": 1958,
-      "wishlist": true
+      "wishlist": true,
+      "completedlist": true
     },
     {
       "id": 2,
@@ -22,7 +23,8 @@
       "pages": 784,
       "title": "Fairy tales",
       "year": 1836,
-      "wishlist": true
+      "wishlist": false,
+      "completedlist": false
     },
     {
       "id": 3,
@@ -34,7 +36,8 @@
       "pages": 928,
       "title": "The Divine Comedy",
       "year": 1315,
-      "wishlist": true
+      "wishlist": true,
+      "completedlist": false
     },
     {
       "id": 4,
@@ -1108,9 +1111,9 @@
     {
       "id": 1,
       "userName": "Deepak Sharma",
-      "Password": "dep@123!",
+      "password": "dep@123!",
       "Phone": "9988776655",
-      "Email": "Deepak@gmail.com",
+      "email": "Deepak@gmail.com",
       "UserType": "Customer",
       "WishList": [
         1,

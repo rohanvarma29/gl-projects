@@ -22,9 +22,19 @@ export class LoginComponent implements OnInit {
   login(){
     this.http.get<any>("http://localhost:3000/Users")
     .subscribe(res=>{
-      const user = res.find((a:any)=>{
-        return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
-      });
+      console.log(res);
+      // const user = res.find((a:any)=>{
+      //   return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
+      // });
+      let user = false;
+      res.map((a: any) => {
+        console.log(a.email, a.password)
+        console.log(this.loginForm)
+        if ( a.email === this.loginForm.value.email && a.password === this.loginForm.value.password) {
+          user = true;
+
+        }
+      })
       if(user){
         alert("Login Is Done Successfully");
         this.loginForm.reset();

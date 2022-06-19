@@ -9,13 +9,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { CompletedListComponent } from './completedlist/completedlist.component';
 @NgModule({
   declarations: [
     AppComponent,
     BookDashboardComponent,
     LoginComponent,
     SignupComponent,
-    WishlistComponent
+    WishlistComponent,
+    CompletedListComponent
   ],
   imports: [
     BrowserModule,

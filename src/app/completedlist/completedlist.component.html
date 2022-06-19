@@ -25,10 +25,12 @@
   
   
     <tbody>
-      <ng-container *ngFor="let book of bookData">
+      <ng-container>
+
+      <div *ngFor="let book of bookData">
   
   
-      <tr *ngIf="book.wishlist">
+      <tr *ngIf="book.completedlist">
         <td>{{book.id}}</td>
         <td><img src='assets/{{book.imageLink}}' alt="Girl in a jacket" width="80" height="100"></td>
         <td>{{book.title}}</td>
@@ -37,9 +39,8 @@
         <td>{{book.country}}</td>
         <td>{{book.language}}</td>
         <td>{{book.year}}</td>
-  
-  
       </tr>
+      </div>
     </ng-container>
     </tbody>
   </table>
