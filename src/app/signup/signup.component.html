@@ -14,7 +14,7 @@
 
 
 
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col-md-6">
       <div class="card">
@@ -25,10 +25,7 @@
         </div>
         <form action="">
           <form [formGroup]="signupForm" (ngSubmit)="signUp()">
-            <!-- <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Full Name</label>
-              <input type="text" class="form-control" id="exampleInputPassword1">
-            </div> -->
+           
             <div style="color: white;" class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Full Name</label>
               <input formControlName="fullname" type="text" class="form-control" id="exampleInputPassword1">
@@ -56,5 +53,36 @@
         </form>
       </div>
     </div>
+  </div>
+</div> -->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <p style="font-size: 30px ;"> Please Register Yourself!</p>
+    </div>
+
+    <!-- Signup Form -->
+    <form [formGroup]="signupForm" (ngSubmit)="signUp()">
+      <input formControlName="fullname" type="text" class="form-control" id="exampleInputPassword1" placeholder="Full name">
+      <input formControlName="mobile" type="number" class="form-control" id="exampleInputPassword1" placeholder="Mobile no">
+      <input formControlName="email" type="email" id="login" class="fadeIn second" name="login" placeholder="Email address">
+      <input formControlName="password" type="password" id="password" class="fadeIn third" name="login" placeholder="Password">
+      <input type="submit" class="fadeIn fourth" value="Signup">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="#" routerLink="/login">Already Registered? Click to Login</a>
+    </div>
+
   </div>
 </div>

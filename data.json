@@ -1132,6 +1132,13 @@
       "password": "rohan",
       "mobile": 9999999999,
       "id": 2
+    },
+    {
+      "fullname": "Naruto",
+      "email": "naruto@xyz.com",
+      "password": "naruto",
+      "mobile": 4564564564,
+      "id": 3
     }
   ]
 }
