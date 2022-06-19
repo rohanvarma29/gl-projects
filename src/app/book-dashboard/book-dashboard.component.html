@@ -1,0 +1,114 @@
+<nav class="navbar navbar-light bg-success">
+  <div class="container-fluid">
+    <h3>Magic of Books</h3>
+    <div class="d-flex" *ngIf=!viewonly>
+      <!-- <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add Books
+      </button>&nbsp;&nbsp; -->
+      <button type="button" routerLink="/wishlist" class="btn-btn-warning">WishList</button>
+      <button style="background-color: darkred; color: white;" routerLink="/login" type="button" class="btn-btn-danger mx-2">
+        Log Out
+      </button>
+
+
+    </div>
+    <div class="d-flex" *ngIf=viewonly>
+      <button style="background-color: blue; color: white;" type="button" routerLink="/login" class="btn-btn-warning">Login</button>
+      <button style="background-color: white; color: black;" routerLink="/signup" type="button" class="btn-btn-danger mx-2">
+        Sign up
+      </button>
+    </div>
+  </div>
+</nav>
+
+
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">Image</th>
+      <th scope="col">Book Name</th>
+      <th scope="col">Pages</th>
+      <th scope="col">Author</th>
+      <th scope="col">Country</th>
+      <th scope="col">Language</th>
+      <th scope="col">Year</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let book of bookData">
+      <td>{{book.id}}</td>
+      <td><img src='assets/{{book.imageLink}}' alt="Girl in a jacket" width="80" height="100"></td>
+      <td>{{book.title}}</td>
+      <td>{{book.pages}}</td>
+      <td>{{book.author}}</td>
+      <td>{{book.country}}</td>
+      <td>{{book.language}}</td>
+      <td>{{book.year}}</td>
+      
+      
+            <!-- <td>{{book.email}}</td>
+      <td>{{book.mobile}}</td>
+      <td>{{book.salary}}</td> -->
+      <td *ngIf=!viewonly>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- <button (click)="onUpdate(book)" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>&nbsp;&nbsp; -->
+        <button type="button" (click)="addtowishlist(book)" class="btn btn-danger">{{!book.wishlist ? 'add to wish' : 'remove form wish'}}</button>&nbsp;&nbsp;
+        <!-- <button (click)="deletebookDetails(book)"  type="button" class="btn btn-danger">Delete</button> -->
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">book Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Book Name</label>
+            <input type="text" class="form-control" formControlName="name">
+
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Pages</label>
+            <input type="number" class="form-control" formControlName="roll">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Author</label>
+            <input type="text" class="form-control" formControlName="email">
+          </div>
+          <!--
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Mobile</label>
+            <input type="text" class="form-control" formControlName="mobile">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Salary</label>
+            <input type="text" class="form-control" formControlName="salary">
+          </div> -->
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="postBookDetails()" class="btn btn-primary">Add</button>
+
+        <button type="button" (click)="updateBookDetails()" class="btn btn-warning">Update</button>
+        <!-- <button type="button" (click)="addtowishlist()" class="btn btn-danger">addwish</button> -->
+      </div>
+    </div>
+  </div>
+</div>

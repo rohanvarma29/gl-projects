@@ -1,0 +1,9 @@
+export class BookModel{
+  id:number=0;
+  name:string="";
+  roll:number=0;
+  email:string="";
+  mobile:number=0;
+  salary:number=0;
+  wishlist : boolean = false;
+}
