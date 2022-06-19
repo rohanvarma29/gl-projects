@@ -24,7 +24,7 @@
       "title": "Fairy tales",
       "year": 1836,
       "wishlist": false,
-      "completedlist": false
+      "completedlist": true
     },
     {
       "id": 3,
@@ -37,7 +37,7 @@
       "title": "The Divine Comedy",
       "year": 1315,
       "wishlist": true,
-      "completedlist": false
+      "completedlist": true
     },
     {
       "id": 4,
