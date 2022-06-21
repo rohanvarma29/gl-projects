@@ -6,7 +6,11 @@ import { map } from 'rxjs/operators';
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
+  username !: string;
+
+  constructor(private http: HttpClient) {
+    this.username = "fuck off";
+   }
 
 
   postBooks(data:any){
@@ -15,12 +19,27 @@ export class ApiService {
     }))
   }
 
+  // setUserName(un: string) {
+  //   console.log("set username function call")
+  //   this.username = un;
+  // }
+
+  // getUserName() {
+  //   return this.username;
+  // }
 
   getBooks(){
     return this.http.get<any>("http://localhost:3000/books").pipe(map((res:any)=>{
       return res;
     }))
   }
+
+  getUsers(){
+    return this.http.get<any>("http://localhost:3000/users").pipe(map((res:any)=>{
+      return res;
+    }))
+  }
+
 
 
   updateBooks(data:any, id:number){

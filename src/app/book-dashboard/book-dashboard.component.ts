@@ -12,6 +12,7 @@ export class BookDashboardComponent implements OnInit {
   formValue!: FormGroup;
   BookModelObj : BookModel = new BookModel();
   bookData !: any;
+  userData !: any;
   viewonly:boolean = false;
   constructor(private formBuilder : FormBuilder, private api: ApiService, private route : Router) {
     this.route.events.subscribe((event) => {
@@ -42,7 +43,7 @@ export class BookDashboardComponent implements OnInit {
     this.BookModelObj.salary = this.formValue.value.salary;
 
     this.api.postBooks(this.BookModelObj).subscribe(res=>{
-      console.log(res);
+      // console.log(res);
       alert("Books Record Added Successfully")
 
       let ref = document.getElementById('cancel')
@@ -58,12 +59,18 @@ export class BookDashboardComponent implements OnInit {
 
 
   getBookDetails(){      // get Api Done
+
+    console.log(localStorage.getItem("username"))
     this.api.getBooks().subscribe(res=>{
       this.bookData = res;
     })
   }
 
-
+  getUserDetails(){      // get Api Done
+    this.api.getUsers().subscribe(res=>{
+      this.userData = res;
+    })
+  }
 
   deleteBookDetails(book:any){    // Delete Api Done
     this.api.deleteBooks(book.id).subscribe(res=>{
@@ -100,10 +107,21 @@ export class BookDashboardComponent implements OnInit {
 
 
   addtowishlist(book:BookModel){
+    console.log(this.userData);
     book.wishlist = !book.wishlist;
     this.api.updateBooks(book, book.id).subscribe(res=>{
-      alert("Book Detail Record Updated")
-
+      //alert("Book Detail Record Updated")
+      let un=localStorage.getItem("username");
+      for(var user of this.userData)
+      {
+        if(user.email==un)
+        {
+          user.wishlist.push(user.id);
+          console.log(user.wishlist);
+          break;
+        }
+      }
+      console.log("Book Detail Record Updated");
       this.getBookDetails()
     })
   }
@@ -111,7 +129,17 @@ export class BookDashboardComponent implements OnInit {
   addtocompletedlist(book:BookModel){
     book.completedlist = !book.completedlist;
     this.api.updateBooks(book, book.id).subscribe(res=>{
-      console.log("Book Detail Record Updated")
+      let un=localStorage.getItem("username");
+      for(var user of this.userData)
+      {
+        if(user.email==un)
+        {
+          user.completedlist.push(user.id);
+          console.log(user.completedlist);
+          break;
+        }
+      }
+      alert("Book Detail Record Updated")
       this.getBookDetails()
     })
   }

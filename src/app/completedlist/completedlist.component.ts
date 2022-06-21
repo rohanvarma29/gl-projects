@@ -13,11 +13,13 @@ export class CompletedListComponent implements OnInit {
   formValue!: FormGroup;
   BookModelObj : BookModel = new BookModel();
   bookData !: any;
+  completedData !:Array<any>;
 
   constructor(private formBuilder : FormBuilder, private api : ApiService) { }
 
   ngOnInit(): void {
     this.getBookDetails();
+    this.completedData=[];
   }
 
 
@@ -89,6 +91,14 @@ export class CompletedListComponent implements OnInit {
       this.formValue.reset();
       this.getBookDetails()
     })
+  }
+
+  addtolist(book:any){
+    
+    console.log("hello");
+    if(this.completedData.indexOf(book)<0)
+      this.completedData.push(book);
+    console.log("hello "+this.completedData);
   }
 
 }

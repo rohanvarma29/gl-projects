@@ -11,11 +11,14 @@ export class WishlistComponent implements OnInit {
   formValue!: FormGroup;
   BookModelObj : BookModel = new BookModel();
   bookData !: any;
+  wishData !:Array<any>;
+  
 
   constructor(private formBuilder : FormBuilder, private api : ApiService) { }
 
   ngOnInit(): void {
     this.getBookDetails();
+    this.wishData=[];
   }
 
 
@@ -88,6 +91,14 @@ export class WishlistComponent implements OnInit {
       this.formValue.reset();
       this.getBookDetails()
     })
+  }
+
+  addtolist(book:any){
+    
+    console.log("hello");
+    if(this.wishData.indexOf(book)<0)
+      this.wishData.push(book);
+    console.log("hello "+this.wishData);
   }
 
 }

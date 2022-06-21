@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms'
 import {Router} from "@angular/router"
+import { ApiService } from '../shared/api.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +11,7 @@ import {Router} from "@angular/router"
 export class LoginComponent implements OnInit {
   public loginForm !: FormGroup;
 
-  constructor(private formBuilder : FormBuilder, private http : HttpClient, private router : Router) { }
+  constructor(private formBuilder : FormBuilder, private http : HttpClient, private router : Router, private api: ApiService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -27,17 +28,20 @@ export class LoginComponent implements OnInit {
       //   return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
       // });
       let user = false;
+      let userDetails: any;
       res.map((a: any) => {
         console.log(a.email, a.password)
         console.log(this.loginForm)
         if ( a.email === this.loginForm.value.email && a.password === this.loginForm.value.password) {
           user = true;
-
+          userDetails = a;
         }
       })
       if(user){
         alert("Login Is Done Successfully");
         this.loginForm.reset();
+        // this.api.setUserName(userDetails.email);
+        localStorage.setItem("username", userDetails.email)
         this.router.navigate(['dashboard'])
       }
       else{
