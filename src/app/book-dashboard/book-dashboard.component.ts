@@ -13,6 +13,8 @@ export class BookDashboardComponent implements OnInit {
   BookModelObj : BookModel = new BookModel();
   bookData !: any;
   userData !: any;
+  userWishlist !: Array<any>;
+  userCompleted!: Array<any>;
   viewonly:boolean = false;
   constructor(private formBuilder : FormBuilder, private api: ApiService, private route : Router) {
     this.route.events.subscribe((event) => {
@@ -33,6 +35,7 @@ export class BookDashboardComponent implements OnInit {
       salary:['']
     })
     this.getBookDetails()
+    this.getUserDetails()
   }
 
   postBookDetails(){
@@ -43,7 +46,7 @@ export class BookDashboardComponent implements OnInit {
     this.BookModelObj.salary = this.formValue.value.salary;
 
     this.api.postBooks(this.BookModelObj).subscribe(res=>{
-      // console.log(res);
+      // // cnsl.lg(res);
       alert("Books Record Added Successfully")
 
       let ref = document.getElementById('cancel')
@@ -59,8 +62,7 @@ export class BookDashboardComponent implements OnInit {
 
 
   getBookDetails(){      // get Api Done
-
-    console.log(localStorage.getItem("username"))
+    // cnsl.lg(localStorage.getItem("username"))
     this.api.getBooks().subscribe(res=>{
       this.bookData = res;
     })
@@ -68,7 +70,15 @@ export class BookDashboardComponent implements OnInit {
 
   getUserDetails(){      // get Api Done
     this.api.getUsers().subscribe(res=>{
-      this.userData = res;
+      let un = localStorage.getItem("username");
+      for (let user of res) {
+        if (user.email === un) {
+          this.userData = user
+          this.getwishlist();
+          this.getcompleted();
+          break;
+        }
+      }
     })
   }
 
@@ -107,40 +117,59 @@ export class BookDashboardComponent implements OnInit {
 
 
   addtowishlist(book:BookModel){
-    console.log(this.userData);
-    book.wishlist = !book.wishlist;
-    this.api.updateBooks(book, book.id).subscribe(res=>{
-      //alert("Book Detail Record Updated")
-      let un=localStorage.getItem("username");
-      for(var user of this.userData)
-      {
-        if(user.email==un)
-        {
-          user.wishlist.push(user.id);
-          console.log(user.wishlist);
-          break;
-        }
-      }
-      console.log("Book Detail Record Updated");
-      this.getBookDetails()
-    })
+
+    const id = book.id;
+    const ind = this.userData.WishList.indexOf(id);
+
+    if (ind < 0)
+      this.userData.WishList = [...this.userData.WishList, id];
+    else 
+      this.userData.WishList.splice(ind, 1);
+
+    
+    this.api.updateUser(this.userData);
+
+    this.ngOnInit();
+  }
+
+  getwishlist(){
+    // cnsl.lg("got here", this.userData)
+    this.userWishlist = this.userData.WishList;
+  }
+
+  getcompleted(){
+    // cnsl.lg("got here", this.userData)
+    this.userCompleted = this.userData.Completed;
   }
 
   addtocompletedlist(book:BookModel){
-    book.completedlist = !book.completedlist;
-    this.api.updateBooks(book, book.id).subscribe(res=>{
-      let un=localStorage.getItem("username");
-      for(var user of this.userData)
-      {
-        if(user.email==un)
-        {
-          user.completedlist.push(user.id);
-          console.log(user.completedlist);
-          break;
-        }
-      }
-      alert("Book Detail Record Updated")
-      this.getBookDetails()
-    })
+    // book.completedlist = !book.completedlist;
+    // this.api.updateBooks(book, book.id).subscribe(res=>{
+    //   let un=localStorage.getItem("username");
+    //   for(var user of this.userData)
+    //   {
+    //     if(user.email==un)
+    //     {
+    //       user.completedlist.push(user.id);
+    //       // cnsl.lg(user.completedlist);
+    //       break;
+    //     }
+    //   }
+    //   alert("Book Detail Record Updated")
+    //   this.getBookDetails()
+    //})
+
+    const id = book.id;
+    const ind = this.userData.Completed.indexOf(id);
+
+    if (ind < 0)
+      this.userData.Completed = [...this.userData.Completed, id];
+    else 
+      this.userData.Completed.splice(ind, 1);
+
+    
+    this.api.updateUser(this.userData);
+
+    this.ngOnInit();
   }
 }

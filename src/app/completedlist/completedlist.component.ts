@@ -14,11 +14,13 @@ export class CompletedListComponent implements OnInit {
   BookModelObj : BookModel = new BookModel();
   bookData !: any;
   completedData !:Array<any>;
+  userData!:any;
 
   constructor(private formBuilder : FormBuilder, private api : ApiService) { }
 
   ngOnInit(): void {
     this.getBookDetails();
+    this.getUserDetails();
     this.completedData=[];
   }
 
@@ -31,7 +33,7 @@ export class CompletedListComponent implements OnInit {
     this.BookModelObj.salary = this.formValue.value.salary;
 
     this.api.postBooks(this.BookModelObj).subscribe(res=>{
-      console.log(res);
+      // cnsl.lg(res);
       alert("Books Record Added Successfully")
 
       let ref = document.getElementById('cancel')
@@ -49,6 +51,17 @@ export class CompletedListComponent implements OnInit {
   getBookDetails(){      // get Api Done
     this.api.getBooks().subscribe(res=>{
       this.bookData = res;
+    })
+  }
+
+  getUserDetails(){      // get Api Done
+    this.api.getUsers().subscribe(res => {
+      res.map((user: any) => {
+        if (user.email == localStorage.getItem('username')) {
+          this.userData = user;
+          this.getcompleted();
+        }
+      })
     })
   }
 
@@ -95,10 +108,21 @@ export class CompletedListComponent implements OnInit {
 
   addtolist(book:any){
     
-    console.log("hello");
+    // cnsl.lg("hello");
     if(this.completedData.indexOf(book)<0)
       this.completedData.push(book);
-    console.log("hello "+this.completedData);
+    // cnsl.lg("hello "+this.completedData);
+  }
+
+  getcompleted(){
+    this.userData.Completed.sort();
+    this.userData.Completed.map((id: any) => {
+      for (let book of this.bookData) {
+        if (book.id == id) {
+          this.completedData.push(book);
+        }
+      }
+    })
   }
 
 }

@@ -21,7 +21,26 @@ export class SignupComponent implements OnInit {
     })
   }
   signUp(){
-    this.http.post<any>("http://localhost:3000/Users", this.signupForm?.value)
+    let userDetails: {};
+    // cnsl.lg(this.signupForm.value, this.signupForm.value.email)
+    userDetails = {
+      'password': this.signupForm.value.password,
+      'email': this.signupForm.value.email,
+      'Phone': this.signupForm.value.mobile,
+      'userName': this.signupForm.value.fullname,
+      'userType': 'customer',
+      'WishList': [],
+      'Completed': []
+    };
+    // userDetails.password = this.signupForm.value['password'];
+    // userDetails['userName'] = this.signupForm.value.fullname;
+    // userDetails['Phone'] = this.signupForm.value.mobile
+    // userDetails['email'] = this.signupForm.value['email'];
+    // userDetails['UserType'] = 'customer'
+    // userDetails['WishList'] = []
+    // userDetails['Completed'] = []
+    // cnsl.lg(userDetails)
+    this.http.post<any>("http://localhost:3000/Users", userDetails)
     .subscribe(res=>{
       alert("Sign Up Is Done Succesfully");
       this.signupForm?.reset();

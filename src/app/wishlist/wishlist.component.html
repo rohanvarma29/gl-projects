@@ -46,11 +46,6 @@
 
 
 <div class="content">
-  <div *ngFor="let book of bookData">
-    <div *ngIf="book.wishlist"> 
-      {{addtolist(book)}}
-    </div>
-  </div>
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
     <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let book1 of wishData">
       <mat-card class="mat-elevation-z4" style="border: 2px black solid;">

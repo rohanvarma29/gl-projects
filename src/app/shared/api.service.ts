@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 @Injectable({
@@ -9,7 +9,7 @@ export class ApiService {
   username !: string;
 
   constructor(private http: HttpClient) {
-    this.username = "fuck off";
+    this.username = "";
    }
 
 
@@ -20,7 +20,7 @@ export class ApiService {
   }
 
   // setUserName(un: string) {
-  //   console.log("set username function call")
+  //   // cnsl.lg("set username function call")
   //   this.username = un;
   // }
 
@@ -67,4 +67,16 @@ export class ApiService {
     }))
   }
 
+
+  updateUser(user: any) {
+    const headers= new HttpHeaders()
+  .set('Content-Type', 'application/json')
+    // cnsl.lg("abcdefghij")
+    return this.http.put<any>("http://localhost:3000/users/"+user.id, user, {headers: headers}).subscribe((res: any) => {
+      // cnsl.lg(res)
+      return res;
+    })
+  }
 }
+
+
